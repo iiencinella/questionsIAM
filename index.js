@@ -8,6 +8,7 @@ const questions = [
       'Estados Unidos',
       'Europa'
     ],
+    'img': 'silueta_Africa_Benin.png',
     'answer': 'África'
   },
   {
@@ -19,6 +20,7 @@ const questions = [
       'Turco',
       'Español'
     ],
+    'img': 'francia.png',
     'answer': 'Francés'
   },
   {
@@ -30,6 +32,7 @@ const questions = [
       'Algodón',
       'Carne'
     ],
+    'img': 'cotonegraine.jpg',
     'answer': 'Algodón'
   },
   {
@@ -38,8 +41,10 @@ const questions = [
     'Options': [
       'Frío',
       'Tropical',
-      'Caluroso'
+      'Caluroso',
+      'Templado'
     ],
+    'img': 'ouidah_benin.jpg',
     'answer': 'Tropical'
   },
   {
@@ -51,6 +56,7 @@ const questions = [
       'Vudú',
       'Judío'
     ],
+    'img': 'benin-voodoo-festival.jpg',
     'answer': 'Vudú'
   },
   {
@@ -62,6 +68,7 @@ const questions = [
       'No ofrece nada',
       'Un beso en la frente'
     ],
+    'img': '800px-Lunch_vendor.jpg',
     'answer': 'Comida y bebida'
   },
   {
@@ -73,6 +80,7 @@ const questions = [
       'Turquia',
       'Porto novo'
     ],
+    'img': 'yanick-folly-benin-porto-novo.jpg',
     'answer': 'Porto novo'
   },
   {
@@ -84,6 +92,7 @@ const questions = [
       '3 veces',
       'Ninguna'
     ],
+    'img': '31o6_482Qhk_l.jpg',
     'answer': 'Ninguna'
   },
   {
@@ -95,6 +104,7 @@ const questions = [
       'al Este',
       'al Oeste'
     ],
+    'img': 'silueta_Africa_Benin.png',
     'answer': 'al Oeste'
   },
   {
@@ -106,6 +116,7 @@ const questions = [
       '20 millones',
       '100 mil'
     ],
+    'img': '1556205060_793921_1556207162_noticia_normal_recorte1.jpg',
     'answer': '11 millones'
   },
   {
@@ -117,6 +128,7 @@ const questions = [
       'Serpiente',
       'Las Aves'
     ],
+    'img': 'benin-serpiente.webp',
     'answer': 'Serpiente'
   }
 ]
@@ -129,6 +141,7 @@ const section_next = document.querySelector('.ques');
 const replay = document.querySelector('#replay');
 const options = document.querySelector('.options');
 const buttons = document.querySelector('.buttons');
+const imagesResponse = document.querySelector('.imagesResponse');
 
 // start_quiz button event 
 start_quiz.addEventListener('click', () => {
@@ -172,22 +185,22 @@ function show_question(index) {
   const quiz_question = document.querySelector('.quiz_question');
   quiz_question.innerHTML = `<h1><p>${questions[index].id}. </p>${questions[index].question}</h1>`
   //  question option list 
-  options.innerHTML = `<div class="option_list">${questions[index].Options[0]}</div>
-    <div class="option_list">${questions[index].Options[1]}</div>
-    <div class="option_list">${questions[index].Options[2]}</div>
-    <div class="option_list">${questions[index].Options[3]}</div>`
+  let optionsItems = ''
+  imagesResponse.innerHTML = ''
+  for (let i = 0; i < questions[index].Options.length; i++) {
+    optionsItems += `<div class="option_list">${questions[index].Options[i]}</div>`;
+  }
+  options.innerHTML = optionsItems
 
   const options_list = document.querySelectorAll('.option_list');
   options_list.forEach((e) => {
     e.addEventListener('click', (op) => {
       if (op.target.innerHTML == questions[active].answer) {
-        console.log(op.target.innerHTML);
         userscore++; //userscore incresed by correct answer
         e.classList.add('correct');
         options.classList.add('disabled');
         buttons.classList.remove('disabled');
       }
-
       else {
         e.classList.add('wrong');
         options.classList.add('disabled');
@@ -199,12 +212,18 @@ function show_question(index) {
           }
         }
       }
+      imagesResponse.innerHTML = `<img src=${questions[index].img} />`
     })
   })
 }
 
 function result() {
   const score = document.querySelector('.score');
-  score.innerHTML = `<h1>Your Score is</h1><span><p>${userscore}</p>of<p>${questions.length}</p></span>`
+  let message = ''
+  if (userscore === questions.length) message = `<h1>Felicidades!!!</h1><span><p>Acertaste todas las preguntas</p></span>`;
+  else if (userscore > (questions.length * 0.7)) message = `<h1>Muy bien!</h1><span>Acertaste<p>${userscore}</p>de<p>${questions.length}</p>preguntas</span>`;
+  else if (userscore > (questions.length * 0.5)) message = `<h1>Bien</h1><span>Acertaste<p>${userscore}</p>de<p>${questions.length}</p>preguntas</span>`;
+  else message = `<h1>Acertaste</h1><span><p>${userscore}</p>de<p>${questions.length}</p>preguntas.</span>`;
+  score.innerHTML = message;
 }
 

@@ -182,3 +182,13 @@ footer {
 span p {
   padding: 0 5px;
 }
+
+.imagesResponse {
+  display: flex;
+  justify-content: center;
+}
+
+.imagesResponse img {
+  width: 256px;
+  height: 256px;
+}
