@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logo.png" />
+  <title>¿Quién quiere ser misionero?</title>
+  
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>¿Quién quiere ser misionero?</h1>
+    <p>El juego de preguntas y respuestas más divertido de la IAM</p>
+  </header>
+  <span class="start">
+    <button id="start_quiz">Comenzar</button>
+  </span>
+  <!-- quiz box -->
+  <section class="quiz_container">
+    <div class="quiz_text">
+      <h1>Juego de preguntas sobre </h1>
+      <img src="bandera.png" width="64px" height="64px" />
+    </div>
+  
+    <div class="quiz_box">
+      <div class="quiz_question"></div>
+      <div class="options"></div>
+    </div>
+  
+    <footer>
+      <div class="buttons">
+        <button class="btn" id="next">Próxima pregunta</button>
+      </div>
+    </footer>
+  </section>
+  
+  <article class="result_box">
+    <div class="score"></div>
+    <button id="replay" class="btn">Comenzar de nuevo</button>
+  </article>
+
+  <script src="index.js"></script>
+</body>
+</html>
