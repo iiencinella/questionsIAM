@@ -8,7 +8,7 @@ const questions = [
       'Estados Unidos',
       'Europa'
     ],
-    'img': 'silueta_Africa_Benin.png',
+    'img': 'images/silueta_Africa_Benin.png',
     'answer': 'África'
   },
   {
@@ -20,7 +20,7 @@ const questions = [
       'Turco',
       'Español'
     ],
-    'img': 'francia.png',
+    'img': 'images/francia.png',
     'answer': 'Francés'
   },
   {
@@ -32,7 +32,7 @@ const questions = [
       'Algodón',
       'Carne'
     ],
-    'img': 'cotonegraine.jpg',
+    'img': 'images/cotonegraine.jpg',
     'answer': 'Algodón'
   },
   {
@@ -44,7 +44,7 @@ const questions = [
       'Caluroso',
       'Templado'
     ],
-    'img': 'ouidah_benin.jpg',
+    'img': 'images/ouidah_benin.jpg',
     'answer': 'Tropical'
   },
   {
@@ -56,7 +56,7 @@ const questions = [
       'Vudú',
       'Judío'
     ],
-    'img': 'benin-voodoo-festival.jpg',
+    'img': 'images/benin-voodoo-festival.jpg',
     'answer': 'Vudú'
   },
   {
@@ -68,7 +68,7 @@ const questions = [
       'No ofrece nada',
       'Un beso en la frente'
     ],
-    'img': '800px-Lunch_vendor.jpg',
+    'img': 'images/800px-Lunch_vendor.jpg',
     'answer': 'Comida y bebida'
   },
   {
@@ -80,7 +80,7 @@ const questions = [
       'Turquia',
       'Porto novo'
     ],
-    'img': 'yanick-folly-benin-porto-novo.jpg',
+    'img': 'images/yanick-folly-benin-porto-novo.jpg',
     'answer': 'Porto novo'
   },
   {
@@ -92,7 +92,7 @@ const questions = [
       '3 veces',
       'Ninguna'
     ],
-    'img': '31o6_482Qhk_l.jpg',
+    'img': 'images/31o6_482Qhk_l.jpg',
     'answer': 'Ninguna'
   },
   {
@@ -104,7 +104,7 @@ const questions = [
       'al Este',
       'al Oeste'
     ],
-    'img': 'silueta_Africa_Benin.png',
+    'img': 'images/silueta_Africa_Benin.png',
     'answer': 'al Oeste'
   },
   {
@@ -116,7 +116,7 @@ const questions = [
       '20 millones',
       '100 mil'
     ],
-    'img': '1556205060_793921_1556207162_noticia_normal_recorte1.jpg',
+    'img': 'images/1556205060_793921_1556207162_noticia_normal_recorte1.jpg',
     'answer': '11 millones'
   },
   {
@@ -128,7 +128,7 @@ const questions = [
       'Serpiente',
       'Las Aves'
     ],
-    'img': 'benin-serpiente.webp',
+    'img': 'images/benin-serpiente.webp',
     'answer': 'Serpiente'
   }
 ]
@@ -175,6 +175,7 @@ next.addEventListener('click', () => {
     result_box.style.display = 'block';
     container.style.display = 'none'
     result(); //result function 
+    
   }
 })
 
@@ -225,5 +226,37 @@ function result() {
   else if (userscore > (questions.length * 0.5)) message = `<h1>Bien</h1><span>Acertaste<p>${userscore}</p>de<p>${questions.length}</p>preguntas</span>`;
   else message = `<h1>Acertaste</h1><span><p>${userscore}</p>de<p>${questions.length}</p>preguntas.</span>`;
   score.innerHTML = message;
+
+  const duration = 15 * 1000,
+    animationEnd = Date.now() + duration,
+    defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  const interval = setInterval(function () {
+    const timeLeft = animationEnd - Date.now();
+
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+
+    const particleCount = 50 * (timeLeft / duration);
+
+    // since particles fall down, start a bit higher than random
+    confetti(
+      Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      })
+    );
+    confetti(
+      Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      })
+    );
+  }, 250);
 }
 
